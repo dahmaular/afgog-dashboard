@@ -49,7 +49,7 @@ const Header = () => {
               {/* <Language /> */}
               {/* <Bookmarks /> */}
               <DarkMode />
-              <BellCompo />
+              {/* <BellCompo /> */}
               {/* <Message /> */}
               {/* <FullScreen /> */}
               {/* <LI className={"theme-setting"}>

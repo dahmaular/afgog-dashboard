@@ -1,5 +1,4 @@
 import { retry } from "@reduxjs/toolkit/dist/query";
-import { api } from "../../api/api";
 import {
   LoginRequest,
   LoginResponse,
@@ -8,7 +7,7 @@ import {
 } from "../../types/authTypes";
 import { apis } from "../../api";
 
-export const afgogAuthApi = apis.injectEndpoints({
+export const devtageAuthApi = apis.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation<LoginResponse, LoginRequest>({
       query: (credentials) => ({
@@ -16,11 +15,6 @@ export const afgogAuthApi = apis.injectEndpoints({
         method: "POST",
         body: credentials,
       }),
-      extraOptions: {
-        backoff: () => {
-          retry.fail({ fake: "error" });
-        },
-      },
     }),
     createAccount: build.mutation<SignUpResponse, SignUpRequest>({
       query: (body) => ({
@@ -50,7 +44,4 @@ export const afgogAuthApi = apis.injectEndpoints({
   }),
 });
 
-export const {
-  useLoginMutation,
-  useCreateAccountMutation,
-} = afgogAuthApi;
+export const { useLoginMutation, useCreateAccountMutation } = devtageAuthApi;

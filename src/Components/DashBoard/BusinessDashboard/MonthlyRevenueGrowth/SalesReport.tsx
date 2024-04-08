@@ -1,12 +1,11 @@
 import { Card, CardBody, CardFooter, Col, Row } from "reactstrap";
-import { H5, H6, LI, UL } from "../../../../AbstractElements";
+import { Btn, H5, H6, LI, UL } from "../../../../AbstractElements";
 import { datas } from "../../../../Data/DashBoard/BusinessDashboard/SalesReport";
-import { useOrdersQuery } from "../../../../Service/orders/service";
+import { Link, useNavigate } from "react-router-dom";
+// import { useOrdersQuery } from "../../../../Service/about/service";
 
 const SalesReport = () => {
-  const { isLoading, data } = useOrdersQuery();
-
-  console.log("data", isLoading, data?.data);
+  let navigate = useNavigate();
   return (
     <CardFooter className=" p-0">
       <Row className=" growth-revenue-footer">
@@ -18,13 +17,25 @@ const SalesReport = () => {
               >
                 <div className="d-flex">
                   <div className="data-left-ticket">
-                    <span className="f-12">{data.Heading}</span>
-                    <H5 className="total-num">
-                      <span className="me-1">₦</span>
-                      <span className="counter"> {data.amount}</span>
-                    </H5>
+                    {/* <span className="f-12" style={{ marginRight: 15 }}>
+                      {data.Heading}
+                    </span> */}
+                    <Btn
+                      color="primary"
+                      type="button"
+                      className="me-2"
+                      onClick={() => navigate(data.page)}
+                    >
+                      <H5 className="total-num">
+                        {/* <span className="me-1">₦</span> */}
+                        <span className="counter" style={{ color: "white" }}>
+                          {" "}
+                          {data.Heading}
+                        </span>
+                      </H5>
+                    </Btn>
                   </div>
-                  <div className="data-right-ticket">
+                  {/* <div className="data-right-ticket">
                     <div className="text-md-end">
                       <UL className="simple-list">
                         <LI>
@@ -35,14 +46,14 @@ const SalesReport = () => {
                         </LI>
                       </UL>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="progress-showcase">
                   <div className="progress sm-progress-bar">
                     <div
                       className={`progress-bar ${data.ProgressBarColor}`}
                       role="progressbar"
-                      style={{ width: "75%" }}
+                      style={{ width: "100%" }}
                       aria-valuenow={25}
                       aria-valuemin={0}
                       aria-valuemax={100}

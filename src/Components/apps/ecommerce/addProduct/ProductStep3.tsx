@@ -15,7 +15,7 @@ interface propsTypes {
 type FormInputs = {
   amount: string;
   price: string;
-  size: string;
+  size: [string];
   color: string;
   noOfItems: string;
 };
@@ -31,7 +31,7 @@ type Step2Props = {
   availability: string;
   description: string;
   specification: string;
-  image: string;
+  image: [string];
 };
 
 let message: string;
@@ -53,13 +53,15 @@ const ProductStep3 = (props: propsTypes) => {
   const [step2, setStep2] = useState<Step2Props>({
     availability: "",
     description: "",
-    image: "",
+    image: [""],
     specification: "",
   });
   const toggle = () => setModal(!modal);
 
   const [addProduct, { isLoading, data, originalArgs }] =
     useAddProductMutation();
+  const [size, setSize] = useState<[string]>([""]);
+  const [color, setColor] = useState<[string]>([""]);
 
   const getPreviousData = async () => {
     const step1 = localStorage.getItem("@step1");
@@ -79,15 +81,18 @@ const ProductStep3 = (props: propsTypes) => {
   const submitFun = async () => {
     try {
       const data = getValues();
-      let sizeArray: string[] = [];
-      sizeArray.push(data.size as string);
+      let sizeArray: string[] = [""];
+      // sizeArray.push(data.size);
+      console.log("data", size, color);
+      // setColor((image) => [data.size]);
+      // setSize((size) => [data.size]);
 
       if (
         data.amount !== "" &&
-        data.color !== "" &&
+        data.color.length !== null &&
         data.noOfItems !== "" &&
         data.price !== "" &&
-        data.size !== ""
+        data.size.length !== null
       ) {
         const addRequest = {
           amount: data.amount,
@@ -100,11 +105,11 @@ const ProductStep3 = (props: propsTypes) => {
           name: step1.name,
           noOfItems: data.noOfItems,
           price: data.price,
-          size: sizeArray,
+          size,
           specification: step2.specification,
           type: step1.type,
         };
-
+        console.log("request", addRequest);
         const response = await addProduct(addRequest).unwrap();
         console.log("Aprod", response);
         if (response.isSuccess) {
@@ -151,6 +156,7 @@ const ProductStep3 = (props: propsTypes) => {
                 placeholder="For multiple color, seperate with comma e.g
                 white,black"
                 {...register("color", { required: true })}
+                onChange={(e) => setColor(() => [e.target.value])}
               />
               <div className="valid-feedback">{"Looks good!"}</div>
             </Col>
@@ -161,6 +167,7 @@ const ProductStep3 = (props: propsTypes) => {
                 type="text"
                 placeholder="Size"
                 {...register("size", { required: true })}
+                onChange={(e) => setSize((sive) => [e.target.value])}
               />
               <div className="valid-feedback">{"Looks good!"}</div>
             </Col>

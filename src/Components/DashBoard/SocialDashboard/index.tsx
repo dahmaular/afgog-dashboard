@@ -17,7 +17,7 @@ const SocialDashboardContainer = () => {
         <Col xl="9" className="xl-100 box-col-12">
           <Header />
         </Col>
-        <Col xl="3" className="xl-100 box-col-12">
+        {/* <Col xl="3" className="xl-100 box-col-12">
           <Connection />
           <MemberProfile />
         </Col>
@@ -27,7 +27,7 @@ const SocialDashboardContainer = () => {
         <UserCard tittle={AlenaKetrol} imageLink="2.jpg" />
         <Elana />
         <JoinedGroups />
-        <RecentActivity />
+        <RecentActivity /> */}
       </Row>
     </Container>
   );

@@ -1,6 +1,6 @@
 export const Href = "#javascript";
 // business Dashboard
-export const WelcomeText = "Welcome back to Afgog dashboard";
+export const WelcomeText = "Welcome back to Devtagefs Admin dashboard";
 export const TodaysSale = "Today's Sale";
 export const Earrning = "Earning";
 export const Yoursales = "your sales";
@@ -12,6 +12,7 @@ export const NumberofThisMonthlyRevenueGrowth =
   "Number of This Monthly Revenue Growth";
 export const Purchase = "Purchase";
 export const Sale = "Sale";
+export const HomePage = "HomePage";
 export const Totalsales = "Total sales";
 export const TotalIncome = "Total Income";
 export const ActiveUser = "Active User";
@@ -647,7 +648,7 @@ export const DataTableHeading = "Data Table";
 
 //Social Dashboard
 export const paragraph = `Your dashboard is ready! and you have completed 40% of your this week. So start a new goal and improve your result.`;
-export const WelcomeSocial = "Welcome back, Jack!";
+export const WelcomeSocial = "Welcome back";
 export const ElanaSaintHeading = "Jack Saint";
 export const Followers = "Followers";
 export const Posts = "Posts";
@@ -1486,7 +1487,7 @@ export const JavascriptModeHeading = "Javascript Mode";
 export const HTMLModeHeading = "HTML Mode";
 export const CSSModeHeading = "CSS Mode";
 export const JavaModeHeading = "Java Mode";
-export const MdeEditorExample = "MDE Editor Example";
+export const MdeEditorExample = "Text Editor";
 export const MdeEditorText = `Enter text in the area on the left. For more info, click the ? (help) icon in the menu.`;
 export const Instructions = "Instructions";
 export const SecondExample = "Second Example";

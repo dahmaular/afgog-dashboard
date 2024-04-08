@@ -34,7 +34,7 @@ const UserInfo = () => {
         </Row>
       </Col>
       <Userdesignation
-        address={authData.businessAddress}
+        address={authData.firstName}
         fname={authData.firstName}
         lname={authData.lastName}
         phone={authData.phone}

@@ -34,10 +34,11 @@ export const fetchBookmaekApi = `${api}/bookmark.json`;
 export const GooglechartApi = `${api}/googleChartData.json`;
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3001/api/",
+  // baseUrl: "https://afgog-api.onrender.com/api/",
+  baseUrl: "http://localhost:4001/api/",
   prepareHeaders: (headers, { getState }) => {
     const { token } = (getState() as RootState).user;
-    console.log("token", token);
+    // console.log("token", token);
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
       // headers.set("Content-Type", "multipart/form-data");
@@ -49,6 +50,6 @@ const baseQuery = fetchBaseQuery({
 export const apis = createApi({
   reducerPath: "api",
   baseQuery,
-  tagTypes: [],
+  tagTypes: ["getBanner"],
   endpoints: () => ({}),
 });

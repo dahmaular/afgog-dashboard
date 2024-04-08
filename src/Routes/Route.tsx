@@ -124,10 +124,14 @@ import SearchVideo from "../pages/others/SearchPages/SearchVideo";
 import SearchImages from "../pages/others/SearchPages/SearchImages";
 import ProductDetailPage from "../pages/apps/ecommerce/ProductDetails";
 import AddProduct from "../pages/FormLayout/FormWizard";
+import BannerEditPage from "../pages/Home/edit-banner";
+import ServicePage from "../pages/Service/edit-service";
+import AboutPage from "../pages/apps/AboutUs/edit-about";
+import ContactPage from "../pages/Contact/edit-contact";
 const routes = [
   // dashboard routes
   {
-    path: `${process.env.PUBLIC_URL}/dashboard/business`,
+    path: `${process.env.PUBLIC_URL}/dashboard/`,
     Component: <BusinessDashboard />,
   },
   {
@@ -629,6 +633,24 @@ const routes = [
   {
     path: `${process.env.PUBLIC_URL}/others/search-images`,
     Component: <SearchImages />,
+  },
+
+  // HomePages routes
+  {
+    path: `${process.env.PUBLIC_URL}/home/banner`,
+    Component: <BannerEditPage />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/home/service`,
+    Component: <ServicePage />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/home/about`,
+    Component: <AboutPage />,
+  },
+  {
+    path: `${process.env.PUBLIC_URL}/home/contact`,
+    Component: <ContactPage />,
   },
 ];
 export default routes;

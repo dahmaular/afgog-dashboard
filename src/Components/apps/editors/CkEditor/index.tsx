@@ -12,9 +12,9 @@ const CkEditorContainer = () => {
           <HeadingCommon Heading={CKEditorExample} />
           <CardBody>
             {/* <CKEditor
- editor={ClassicEditor}
- data="<p>Hello from CKEditor 5!</p>"
- /> */}
+              editor={ClassicEditor}
+              data="<p>Hello from CKEditor 5!</p>"
+            /> */}
           </CardBody>
         </Card>
       </Col>

@@ -46,7 +46,7 @@ const BusinessDashboardContainer = () => {
             <TotalInvestment />
           </Col> */}
           <Col xxl="12" className="box-col-12">
-            <ProductDetails />
+            {/* <ProductDetails /> */}
           </Col>
         </Row>
       </Container>

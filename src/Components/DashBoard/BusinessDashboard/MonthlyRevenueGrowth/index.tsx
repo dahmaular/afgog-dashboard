@@ -12,8 +12,8 @@ const MonthlyRevenueGrowth = () => {
     <Card className=" card-with-border monthly-growth o-hidden">
       <HeadingCommon
         className="card-no-border"
-        Heading={MonthlyRevenueGrowthHeading}
-        dangerouslySetInnerHTML={NumberofThisMonthlyRevenueGrowth}
+        Heading="Modules"
+        dangerouslySetInnerHTML="Active Modules in the App"
       />
       {/* <MonthlyRevenueGrowthBody /> */}
       <SalesReport />

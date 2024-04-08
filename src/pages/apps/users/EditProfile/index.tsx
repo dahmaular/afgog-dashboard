@@ -1,5 +1,5 @@
 import Breadcrumbs from "../../../../CommonElements/Breadcrumbs";
-import EditProfileContainer from '../../../../Components/apps/users/EditProfile/index';
+import EditProfileContainer from "../../../../Components/apps/users/EditProfile/index";
 
 const EditProfile = () => {
   return (

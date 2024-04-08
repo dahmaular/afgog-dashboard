@@ -37,6 +37,8 @@ const Registration = (props: propsTypes) => {
   const [category, setCategory] = useState<string>("");
   const [type, setType] = useState<string>("");
 
+  console.log("cat", prodCategory, brands);
+
   const onSubmit = async () => {
     const data = getValues();
     // props.setGoSteps(1);

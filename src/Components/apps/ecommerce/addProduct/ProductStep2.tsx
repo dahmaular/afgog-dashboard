@@ -3,8 +3,14 @@ import { ConfirmPassword, Email, Href, Password } from "../../../../Constant";
 import { Btn } from "../../../../AbstractElements";
 import { useForm } from "react-hook-form";
 import { Item } from "react-photoswipe-gallery";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useUploadImageMutation } from "../../../../Service/products/service";
+import {
+  getDownloadURL,
+  ref as storageRef,
+  uploadBytes,
+} from "firebase/storage";
+import storage from "../../../../Firebase/firebase";
 
 interface propsTypes {
   goSteps: number;
@@ -15,7 +21,7 @@ type FormInputs = {
   availability: string;
   description: string;
   specification: string;
-  image: string;
+  image: [string];
 };
 
 const ProductStep2 = (props: propsTypes) => {
@@ -28,15 +34,59 @@ const ProductStep2 = (props: propsTypes) => {
 
   const [uploadImage, { isLoading }] = useUploadImageMutation();
 
-  const [imagePreview, setImagePreview] = useState<string>("");
+  const [imagePreview, setImagePreview] = useState<[string]>([""]);
 
-  const handleOnChange = async (event: any) => {
-    console.log(event.target.files[0]);
-    const file = new FormData();
-    file.append("image", event.target.files[0]);
-    const res = await uploadImage(file).unwrap();
-    console.log("fileImage", res);
-    setImagePreview(res.imageUrl);
+  const giveCurrentDateTime = () => {
+    const today = new Date();
+    const date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    const time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    const dateTime = date + " " + time;
+    return dateTime;
+  };
+
+  const handleOnChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const dateTime = giveCurrentDateTime();
+    console.log(event.target.files);
+    // const file = new FormData();
+    // file.append("image", event.target.files[0]);
+    // const res = await uploadImage(file).unwrap();
+    // console.log("fileImage", res);
+    // setImagePreview(res.imageUrl);
+    if (event?.target?.files === null) {
+      // toastifyError("Please select an image");
+      return;
+    }
+    const image = event.target.files[0];
+    const imageRef = storageRef(storage, `products/${dateTime}+${image.name}`);
+
+    uploadBytes(imageRef, image)
+      .then((snapshot) => {
+        getDownloadURL(snapshot.ref)
+          .then((url) => {
+            // saveData(url);
+
+            // if (imagePreview[0] === "") {
+            //   imagePreview.push(url);
+            // }
+            // imagePreview.push(url);
+            setImagePreview((image) => [url]);
+            console.log("Url", url);
+          })
+          .catch((error) => {
+            // toastifyError(error.message);
+            console.log("error", error);
+          });
+      })
+      .catch((error) => {
+        // toastifyError(error.message);
+        console.log("catch error", error);
+      });
   };
 
   const onSubmit = async () => {
@@ -45,8 +95,9 @@ const ProductStep2 = (props: propsTypes) => {
       data.availability !== null &&
       data.description !== "" &&
       data.specification !== "" &&
-      imagePreview !== ""
+      imagePreview.length !== null
     ) {
+      // setImagePreview((image) => [...imagePreview, image]);
       data.image = imagePreview;
       localStorage.setItem("@step2", JSON.stringify(data));
       props.setGoSteps(props.goSteps + 1);
@@ -54,6 +105,8 @@ const ProductStep2 = (props: propsTypes) => {
       console.log(errors);
     }
   };
+
+  console.log("Image", imagePreview);
 
   return (
     <Row>
@@ -109,14 +162,14 @@ const ProductStep2 = (props: propsTypes) => {
             <Col md="12 mb-3">
               <Label htmlFor="exampleInputPassword2">Product Image</Label>
               {imagePreview && (
-                <Item original={imagePreview} width="120" height="90">
+                <Item original={imagePreview[0]} width="120" height="90">
                   {({ ref, open }) => (
                     <a href={Href} onClick={open}>
                       <div>
                         <img
                           className="img-thumbnail"
                           ref={ref as React.MutableRefObject<HTMLImageElement>}
-                          src={imagePreview}
+                          src={imagePreview[0]}
                           alt=""
                           style={{ width: "120px", height: "90px" }}
                         />

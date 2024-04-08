@@ -88,7 +88,7 @@ export type ProductRequestObject = {
   brandId: string;
   description: string;
   specification: string;
-  image: string;
+  image: string[];
   amount: string;
   price: string;
   type: string;

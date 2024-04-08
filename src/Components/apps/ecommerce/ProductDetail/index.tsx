@@ -43,13 +43,13 @@ import {
 } from "../../../../Service/products/service";
 import { dynamicImage } from "../../../../Service";
 import { Item } from "react-photoswipe-gallery";
-import storage from "../../../../Firebase/firebase";
-import {
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-  StorageError,
-} from "firebase/storage";
+// import storage from "../../../../Firebase/firebase";
+// import {
+//   ref,
+//   uploadBytesResumable,
+//   getDownloadURL,
+//   StorageError,
+// } from "firebase/storage";
 
 type ProductObject = {
   _id: string;

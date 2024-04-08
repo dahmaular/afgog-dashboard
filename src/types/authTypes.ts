@@ -24,18 +24,13 @@ export type LoginRequest = {
   password: string;
 };
 
-type AuthData = {
+export type AuthData = {
   _id: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
-  storeName?: string;
-  businessAddress?: string;
-  businessType?: string;
-  bankName?: string;
-  accountNumber?: string;
-  bvn?: string;
+  middleName: string;
 };
 
 export type LoginResponse = {

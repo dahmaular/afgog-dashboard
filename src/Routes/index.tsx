@@ -23,15 +23,11 @@ const Routers = () => {
           <>
             <Route
               path={`${process.env.PUBLIC_URL}`}
-              element={
-                <Navigate to={`${process.env.PUBLIC_URL}/dashboard/business`} />
-              }
+              element={<Navigate to={`${process.env.PUBLIC_URL}/dashboard`} />}
             />
             <Route
               path={`/`}
-              element={
-                <Navigate to={`${process.env.PUBLIC_URL}/dashboard/business`} />
-              }
+              element={<Navigate to={`${process.env.PUBLIC_URL}/dashboard`} />}
             />
           </>
         ) : (

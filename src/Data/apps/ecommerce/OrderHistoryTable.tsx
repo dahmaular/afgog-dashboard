@@ -2,7 +2,7 @@ import { Image } from "../../../AbstractElements";
 import { dynamicImage } from "../../../Service";
 import { MoreVertical } from "react-feather";
 import { Href } from "../../../Constant";
-import { OrderResponse } from "../../../types/orderTypes";
+// import { OrderResponse } from "../../../types/aboutTypes";
 
 // export const OrderHistoryTableData = [
 //   {

@@ -15,30 +15,35 @@ import { useLoginMutation } from "../Service/auth/service";
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("damola@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [login, result] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
 
   const SimpleLoginHandle = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = {
-      email,
-      password,
-    };
-    if (email === "" && password == "") {
-      toast.error("Please Enter valid email or password...!");
+    try {
+      if (isLoading) {
+        return;
+      }
+      const data = {
+        email,
+        password,
+      };
+      if (email === "" && password == "") {
+        toast.error("Please Enter valid email or password...!");
+      }
+      const resp = await login(data).unwrap();
+      console.log("Here", resp);
+      if (resp.isSuccess) {
+        console.log("Here", resp.authData);
+        toast.success("Login Success...!");
+        navigate(`${process.env.PUBLIC_URL}/dashboard/`);
+      }
+    } catch (error) {
+      console.log("error", error);
+      throw error;
     }
-    await login(data);
-    // console.log("Here", res);
-    // localStorage.setItem("login", JSON.stringify(true));
-    if (result.isLoading) return;
-    if (result.data?.isSuccess === true) {
-      console.log("Here", result.data);
-      toast.success("Login Success...!");
-      navigate(`${process.env.PUBLIC_URL}/dashboard/business`);
-    }
-    // });
   };
 
   // console.log("res", result);
@@ -69,7 +74,7 @@ const LoginForm = () => {
         </div>
         <FormGroup className="row g-2 mt-3 mb-0">
           <Btn color="primary" className="d-block w-100">
-            {result.isLoading ? "Loading" : Login}
+            {isLoading ? "Loading" : Login}
           </Btn>
         </FormGroup>
         <SocialIcons />

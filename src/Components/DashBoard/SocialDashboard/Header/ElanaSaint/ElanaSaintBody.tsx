@@ -3,10 +3,12 @@ import { ElanaSaintHeading, paragraph } from "../../../../../Constant";
 import { HeaderDatas } from "../../../../../Data/DashBoard/Social Dashboard/Header";
 import { Link } from "react-router-dom";
 
-const ElanaSaintBody = () => {
+const ElanaSaintBody = ({ name }: any) => {
   return (
     <div className="flex-grow-1">
-      <Link to={`${process.env.PUBLIC_URL}/user/user-profile`}><H5>{ElanaSaintHeading}</H5></Link>
+      <Link to={`${process.env.PUBLIC_URL}/user/user-profile`}>
+        <H5>{name}</H5>
+      </Link>
       <P className="f-12 mt-3">{paragraph} </P>
       <UL className="flex-row simple-list">
         {HeaderDatas.map((data, index) => (

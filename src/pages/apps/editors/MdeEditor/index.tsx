@@ -5,7 +5,7 @@ const MdeEditor = () => {
   return (
     <div className="page-body">
       <Breadcrumbs parent="Editors" title="MdeEditor" />
-      <MdeEditorContainer />
+      {/* <MdeEditorContainer /> */}
     </div>
   );
 };

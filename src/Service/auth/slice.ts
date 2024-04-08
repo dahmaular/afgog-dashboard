@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { RootState } from "../../app/store";
-import { afgogAuthApi } from "./service";
+import { devtageAuthApi } from "./service";
 
 export type UserDataType = {
   _id: string;
@@ -9,12 +9,7 @@ export type UserDataType = {
   lastName: string;
   email: string;
   phone: string;
-  storeName?: string;
-  businessAddress?: string;
-  businessType?: string;
-  bankName?: string;
-  accountNumber?: string;
-  bvn?: string;
+  middleName: string;
 };
 
 export interface IMyBankInitialState {
@@ -41,12 +36,7 @@ const initState: IMyBankInitialState = {
     lastName: "",
     email: "",
     phone: "",
-    storeName: "",
-    businessAddress: "",
-    businessType: "",
-    bankName: "",
-    accountNumber: "",
-    bvn: "",
+    middleName: "",
   },
   token: "",
   isAuthenticated: false,
@@ -54,7 +44,7 @@ const initState: IMyBankInitialState = {
   isSuccess: false,
 };
 
-export const afgogAuthSlice = createSlice({
+export const devtageAuthSlice = createSlice({
   name: "user",
   initialState: initState,
   reducers: {
@@ -84,26 +74,21 @@ export const afgogAuthSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(afgogAuthApi.endpoints.login.matchPending, (state) => {
+    builder.addMatcher(devtageAuthApi.endpoints.login.matchPending, (state) => {
       state.status = "login";
     });
     builder.addMatcher(
-      afgogAuthApi.endpoints.login.matchFulfilled,
+      devtageAuthApi.endpoints.login.matchFulfilled,
       (state, { payload }) => {
         const { token, isSuccess, authData } = payload;
         if (isSuccess) {
           state.authData = {
             _id: authData?._id,
-            email: authData?.email,
-            firstName: authData?.firstName,
-            lastName: authData?.lastName,
-            phone: authData?.phone,
-            storeName: authData?.storeName,
-            accountNumber: authData?.accountNumber,
-            bankName: authData?.bankName,
-            businessAddress: authData?.businessAddress,
-            businessType: authData?.businessType,
-            bvn: authData?.bvn,
+            email: authData.email,
+            firstName: authData.firstName,
+            lastName: authData.lastName,
+            middleName: authData.middleName,
+            phone: authData.phone,
           };
           state.token = token;
           state.status = "login-success";
@@ -115,7 +100,7 @@ export const afgogAuthSlice = createSlice({
         state.isAuthenticated = false;
       }
     );
-    builder.addMatcher(afgogAuthApi.endpoints.login.matchRejected, (state) => {
+    builder.addMatcher(devtageAuthApi.endpoints.login.matchRejected, (state) => {
       state.status = "login-error";
       state.isAuthenticated = false;
     });
@@ -166,7 +151,7 @@ export const {
   verify,
   verifyError,
   verifySuccess,
-} = afgogAuthSlice.actions;
+} = devtageAuthSlice.actions;
 export const selectIsAuthenticated = (state: RootState) =>
   state.user.isAuthenticated;
-export default afgogAuthSlice.reducer;
+export default devtageAuthSlice.reducer;
